@@ -82,3 +82,4 @@ kanalservice:v1
 python main.py
 ```
 3) Скрипт будет автоматически каждые 5 секунд обновлять данные из Google-таблицы и синхронизировать их с базой данных.
+4) Ссылка на тестовый файл: https://docs.google.com/spreadsheets/d/1GhA2pITIdmMIGLfWBh8ApXdFJNxhteuHiABSACsnPVQ/edit?usp=sharing
