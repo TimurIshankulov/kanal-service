@@ -1,4 +1,5 @@
 import sys
+import datetime
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -28,6 +29,9 @@ class PersistentManager:
         for row in self.table:
             while len(row) < 4:
                 row.append(None)
+            if row[3] is not None:
+                row[3] = datetime.datetime.strptime(row[3], '%d.%m.%Y').date()
+                
             record = db_session.query(Record).filter_by(record_id=row[0]).first()
             if record is None:  # Create new record if it doesn't exist
                 record = Record(record_id=row[0], order_id=row[1],
