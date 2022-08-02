@@ -5,7 +5,7 @@ import google.auth
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = r'secret2.json'
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = r'secret.json'
 
 
 class GoogleSpreadsheetFetcher:
