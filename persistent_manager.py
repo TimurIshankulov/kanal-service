@@ -31,7 +31,7 @@ class PersistentManager:
                 row.append(None)
             if row[3] is not None:
                 row[3] = datetime.datetime.strptime(row[3], '%d.%m.%Y').date()
-                
+
             record = db_session.query(Record).filter_by(record_id=row[0]).first()
             if record is None:  # Create new record if it doesn't exist
                 record = Record(record_id=row[0], order_id=row[1],
@@ -68,7 +68,5 @@ class PersistentManager:
                 print(sys.exc_info()[1])
                 db_session.rollback()
         db_session.close()
-        print(ids_in_table)
-        print(ids_in_database)
-        print(ids_to_remove)
+
 

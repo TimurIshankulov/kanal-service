@@ -51,8 +51,8 @@ class GoogleSpreadsheetFetcher:
                 if j < 4:
                     row.append(data[i]['values'][j].get('formattedValue'))
             table.append(row)
-            print(row)
         if len(table) > 1:
+            print('Data fetched successfully')
             return table[1:]
         else:
             return None
