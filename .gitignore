@@ -1,6 +1,7 @@
 config.py
 secret.json
 secret.json.bak
+kanalservice.dockerfile
 
 .idea/
 # Byte-compiled / optimized / DLL files
