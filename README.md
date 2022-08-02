@@ -35,3 +35,43 @@
 3. Оценка эффективности будет включать в правильность применения алгоритмов и структур данных. Например, стоит учитывать, что кортеж (tuple) работает быстрее, чем списки (list).
 4. Комментированность кода – комментарии должны быть понятны проверяющему, и содержать достаточную информацию о функции, классе или методе.
 5. По 5 пункту оценивается соответствие требованиям и подробность инструкции по запуску. Если для пользователя проверяющего не будет открыт доступ, или согласно инструкции не предоставленное ПО не запуститься баллы не будут начислены.
+
+# Инструкции по установке
+
+1) Скачать образы ubuntu и postgresql с docker:
+
+```
+sudo docker pull postgres:latest
+sudo docker pull ubuntu:latest
+```
+2) Создать папку для хранения фалов БД:
+```
+sudo mkdir /var/db
+sudo mkdir /var/db/kanalservice
+```
+3) Запустить контейнер с PostgreSQL, указав свой пароль для пользователя postgres (пользователь по умолчанию):
+```
+sudo docker run -d \
+--ipc=host \
+--restart always \
+-p 5432:5432 \
+-v /var/db/kanalservice:/var/lib/postgresql/data \
+-e POSTGRES_PASSWORD=<password> \
+-e POSTGRES_DB=kanalservice \
+--name=kanalservice-postgresql \
+postgres:latest
+```
+4) Переименовать **kanalservice_template.dockerfile** в **kanalservice.dockerfile** и указать в нем свои параметры подключения: пользователь, пароль, имя базы данных, хост и порт.
+
+5) Сохранить свой файл **secret.json** с параметрами подключения к Google API **в папке с kanalservice.dockerfile**.
+6) Собрать образ:
+```
+sudo docker build -t kanalservice:v1 -f kanalservice.dockerfile .
+```
+7) Запустить контейнер с приложением:
+```
+sudo docker run -d \
+--restart always \
+--name=kanalservice \
+kanalservice:v1
+```
